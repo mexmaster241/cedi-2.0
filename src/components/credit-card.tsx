@@ -24,7 +24,7 @@ export function CreditCard() {
         <div className="flex justify-between items-start">
           <div className="w-12 h-10 bg-yellow-500/80 rounded-md" /> {/* Chip */}
           <img 
-            src="/logo-cedi-white.png" 
+            src="/logo-cedi-white.PNG" 
             alt="Cedi Logo" 
             className="w-16 h-16 object-contain opacity-80" 
           />

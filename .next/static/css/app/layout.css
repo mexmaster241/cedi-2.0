@@ -2281,10 +2281,6 @@ body {
   display: none;
 }
 
-.\[\&\>div\:first-child\]\:\!w-0>div:first-child {
-  width: 0px !important;
-}
-
 .\[\&\>span\:last-child\]\:truncate>span:last-child {
   overflow: hidden;
   text-overflow: ellipsis;

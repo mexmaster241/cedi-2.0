@@ -244,7 +244,7 @@ export function BankingSidebar() {
                   >
                     <div className="flex aspect-square size-16 items-center justify-center rounded-lg bg-transparent text-primary-foreground">
                       <Image
-                        src="/logo-cedi.png"
+                        src="/logo-cedi.PNG"
                         alt="Cedi"
                         width={150}
                         height={150}
@@ -252,7 +252,7 @@ export function BankingSidebar() {
                     </div>
                     <div className="flex flex-col gap-0.5 leading-none">
                       <Image
-                        src="/tipografia-cedi.png"
+                        src="/tipografia-cedi.PNG"
                         alt="Cedi"
                         width={100}
                         height={32}
