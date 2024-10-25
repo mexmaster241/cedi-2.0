@@ -75,116 +75,122 @@ const data = {
       url: "#",
       className: "font-clash-display",
     },
+    // {
+    //   title: "Cuenta",
+    //   icon: DollarSign,
+    //   url: "#",
+    //   className: "font-clash-display",
+    //   items: [
+    //     {
+    //       title: "Checking",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //     {
+    //       title: "Savings",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //   ],
+    // },
     {
-      title: "Cuenta",
-      icon: DollarSign,
+      title: "Grupos",
+      icon: Users,
       url: "#",
       className: "font-clash-display",
-      items: [
-        {
-          title: "Checking",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "Savings",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
     },
     {
-      title: "Cards",
+      title: "Tarjetas",
       icon: CreditCard,
       url: "#",
       className: "font-clash-display",
       items: [
         {
-          title: "Credit Cards",
+          title: "Tarjetas de Crédito",
           url: "#",
           className: "font-clash-display",
         },
         {
-          title: "Debit Cards",
+          title: "Tarjetas de Débito",
           url: "#",
           className: "font-clash-display",
         },
       ],
     },
     {
-      title: "Transactions",
+      title: "Transacciones",
       icon: Wallet,
       url: "#",
       className: "font-clash-display",
-      items: [
-        {
-          title: "Recent Transactions",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "Statements",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
+      // items: [
+      //   {
+      //     title: "Transacciones Recientes",
+      //     url: "#",
+      //     className: "font-clash-display",
+      //   },
+      //   {
+      //     title: "Estados de Cuenta",
+      //     url: "#",
+      //     className: "font-clash-display",
+      //   },
+      // ],
     },
+    // {
+    //   title: "Transferencias",
+    //   icon: FileText,
+    //   url: "#",
+    //   className: "font-clash-display",
+    //   items: [
+    //     {
+    //       title: "Entre Cuentas",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //     {
+    //       title: "A Otra Persona",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Pagos de Facturas",
+    //   icon: FileText,
+    //   url: "#",
+    //   className: "font-clash-display",
+    //   items: [
+    //     {
+    //       title: "Pagar Facturas",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //     {
+    //       title: "Administrar Pagos",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Inversiones",
+    //   icon: PieChart,
+    //   url: "#",
+    //   className: "font-clash-display",
+    //   items: [
+    //     {
+    //       title: "Portafolio",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //     {
+    //       title: "Operaciones",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //   ],
+    // },
     {
-      title: "Transfers",
-      icon: FileText,
-      url: "#",
-      className: "font-clash-display",
-      items: [
-        {
-          title: "Between Accounts",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "To Someone Else",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
-    },
-    {
-      title: "Bill Pay",
-      icon: FileText,
-      url: "#",
-      className: "font-clash-display",
-      items: [
-        {
-          title: "Pay Bills",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "Manage Payees",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
-    },
-    {
-      title: "Investments",
-      icon: PieChart,
-      url: "#",
-      className: "font-clash-display",
-      items: [
-        {
-          title: "Portfolio",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "Trade",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
-    },
-    {
-      title: "Support",
+      title: "Soporte",
       icon: HelpCircle,
       url: "#",
       className: "font-clash-display",
