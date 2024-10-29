@@ -75,24 +75,24 @@ const data = {
       url: "#",
       className: "font-clash-display",
     },
-    // {
-    //   title: "Cuenta",
-    //   icon: DollarSign,
-    //   url: "#",
-    //   className: "font-clash-display",
-    //   items: [
-    //     {
-    //       title: "Checking",
-    //       url: "#",
-    //       className: "font-clash-display",
-    //     },
-    //     {
-    //       title: "Savings",
-    //       url: "#",
-    //       className: "font-clash-display",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Negocios",
+      icon: DollarSign,
+      url: "#",
+      className: "font-clash-display",
+      items: [
+        {
+          title: "MiPOS",
+          url: "#",
+          className: "font-clash-display",
+        },
+        {
+          title: "E-commerce",
+          url: "#",
+          className: "font-clash-display",
+        },
+      ],
+    },
     {
       title: "Grupos",
       icon: Users,
@@ -349,16 +349,16 @@ export function BankingSidebar() {
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="font-clash-display cursor-pointer">
                     <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>Perfil</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="font-clash-display cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
+                    <span>Ajustes</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="font-clash-display cursor-pointer text-red-600">
-                  <span>Log out</span>
+                  <span>Cerrar sesión</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

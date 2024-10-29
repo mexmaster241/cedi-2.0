@@ -8,7 +8,7 @@ interface Transaction {
     return (
       <div className="bg-cedi-light-gray dark:bg-gray-800 rounded-lg shadow-md p-6 mt-4">
         <h2 className="text-lg font-clash-display font-semibold mb-4 text-gray-900 dark:text-white">
-          Recent Transactions
+          Transacciones Recientes
         </h2>
         <div className="space-y-4">
           {transactions.map((transaction, index) => (

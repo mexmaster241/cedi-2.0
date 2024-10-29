@@ -1,4 +1,4 @@
-const QUICK_ACTIONS = ['Send', 'Receive'] as const;
+const QUICK_ACTIONS = ['Enviar', 'Recibir'] as const;
 
 export function QuickActions() {
   return (
