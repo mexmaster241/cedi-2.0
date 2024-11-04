@@ -64,7 +64,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { CreditCard as CreditCardComponent } from "@/components/credit-card"
+import RevenueChart from "@/components/dashboard/RevenueChart";
+import { TransferenciasLimite } from "./dashboard/TransferenciasLimite"
+import { MPOSLimit } from "./dashboard/MPOSLimit"
+import { EcommerceLimits } from "./dashboard/EcommerceLimits"
+
 
 // This is sample data for a banking app.
 const data = {
@@ -204,24 +208,60 @@ export function BankingSidebar() {
   const versions = ["1.0.0", "1.1.0", "2.0.0"];
 
   const renderContent = () => {
-    // Change this to check for both "Dashboard" and undefined (default state)
     if (selectedItem === 'Dashboard' || selectedItem === data.navMain[0].title) {
       return (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="flex flex-col">
-              <BalanceCard balance={5240.50} />
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:max-w-2xl">
+              <BalanceCard 
+                balance={5240.50} 
+                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg" 
+              />
+              <TransferenciasLimite 
+                transferenciasRecibidas={1500000} 
+                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              />
+              <MPOSLimit 
+                currentAmount={1000000} 
+                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              />
+              <EcommerceLimits 
+                currentAmount={1000000} 
+                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              />
             </div>
-            <div className="flex justify-center pb-6">
-              <CreditCardComponent />
+            <div className="flex-1 h-[400px] lg:h-[500px]">
+              <RevenueChart className="w-full h-full" />
             </div>
           </div>
-          <QuickActions />
-          <RecentTransactions transactions={[
-            { title: 'Grocery Store', amount: -85.20, date: '2024-03-20' },
-            { title: 'Electric Bill', amount: -120.00, date: '2024-03-19' },
-            { title: 'Online Shopping', amount: -65.99, date: '2024-03-18' },
-          ]} />
+          <div className="mt-6">
+            <QuickActions />
+          </div>
+          <div className="mt-6">
+            <RecentTransactions transactions={[
+              { 
+                producto: 'MPOS',
+                tipo: 'Venta',
+                estatus: 'Completado',
+                monto: 85.20,
+                date: '2024-03-20'
+              },
+              { 
+                producto: 'Transferencias',
+                tipo: 'Pago',
+                estatus: 'Procesando',
+                monto: -120.00,
+                date: '2024-03-19'
+              },
+              { 
+                producto: 'E-commerce',
+                tipo: 'Venta Online',
+                estatus: 'Completado',
+                monto: 65.99,
+                date: '2024-03-18'
+              },
+            ]} />
+          </div>
         </>
       );
     }
