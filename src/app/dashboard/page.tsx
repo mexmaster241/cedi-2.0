@@ -1,15 +1,7 @@
 "use client"
-import Image from "next/image";
-import { BalanceCard } from "@/components/dashboard/BalanceCard";
-import { QuickActions } from "@/components/dashboard/QuickActions";
-import { RecentTransactions } from "@/components/dashboard/RecentTransactions";
 import { BankingSidebar } from "@/components/components-banking-sidebar";
 
-const MOCK_TRANSACTIONS = [
-  { title: 'Grocery Store', amount: -82.35, date: '2024-03-20' },
-  { title: 'Salary Deposit', amount: 3500.00, date: '2024-03-19' },
-  { title: 'Restaurant', amount: -45.80, date: '2024-03-18' },
-];
+
 
 export default function DashboardPage() {
   return (

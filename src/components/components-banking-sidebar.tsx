@@ -68,6 +68,7 @@ import RevenueChart from "@/components/dashboard/RevenueChart";
 import { TransferenciasLimite } from "./dashboard/TransferenciasLimite"
 import { MPOSLimit } from "./dashboard/MPOSLimit"
 import { EcommerceLimits } from "./dashboard/EcommerceLimits"
+import TransferenciasPage from "@/app/dashboard/transferencias/page"
 
 
 // This is sample data for a banking app.
@@ -78,6 +79,19 @@ const data = {
       icon: Home,
       url: "#",
       className: "font-clash-display",
+    },
+    {
+      title: "Transferencias",
+      icon: FileText,
+      url: "/dashboard/transferencias",
+      className: "font-clash-display",
+      items: [
+        {
+          title: "Pago de tarjeta",
+          url: "#",
+          className: "font-clash-display",
+        },
+      ],
     },
     {
       title: "Negocios",
@@ -139,24 +153,6 @@ const data = {
       //   },
       // ],
     },
-    // {
-    //   title: "Transferencias",
-    //   icon: FileText,
-    //   url: "#",
-    //   className: "font-clash-display",
-    //   items: [
-    //     {
-    //       title: "Entre Cuentas",
-    //       url: "#",
-    //       className: "font-clash-display",
-    //     },
-    //     {
-    //       title: "A Otra Persona",
-    //       url: "#",
-    //       className: "font-clash-display",
-    //     },
-    //   ],
-    // },
     // {
     //   title: "Pagos de Facturas",
     //   icon: FileText,
@@ -264,6 +260,9 @@ export function BankingSidebar() {
           </div>
         </>
       );
+    }
+    if (selectedItem === 'Transferencias') {
+      return <TransferenciasPage />;
     }
     return <div>Select an item from the sidebar</div>;
   };
