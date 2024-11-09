@@ -37,8 +37,8 @@ export default function RootLayout({
 <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}
+        <body 
+          className= {`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}
         >
           {children}
         </body>

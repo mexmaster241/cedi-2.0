@@ -65,8 +65,8 @@ const config: Config = {
   				white: 'hsl(var(--cedi-white))',
   				'light-gray': 'hsl(var(--cedi-light-gray))',
   				black: 'hsl(var(--cedi-black))',
-  				'dark-gray': 'hsl(var(--cedi-dark-gray))',
-  			},
+  				'dark-gray': 'hsl(var(--cedi-dark-gray))'
+  			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -74,8 +74,27 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
-  			'clash-display': ['var(--font-clash-display)'],
+  			'clash-display': ['var(--font-clash-display)']
   		},
+  		animation: {
+  			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
+			move: "move 5s linear infinite",
+			
+  		},
+  		keyframes: {
+  			orbit: {
+  				'0%': {
+  					transform: 'rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)'
+  				},
+  				'100%': {
+  					transform: 'rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)'
+  				}
+  			},
+			move: {
+				"0%": { transform: "translateX(-200px)" },
+				"100%": { transform: "translateX(200px)" },
+			},
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
