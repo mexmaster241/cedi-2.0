@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { CardContainer, CardBody, CardItem } from '../ui/3d-card';
 
 interface FAQItem {
   question: string;
@@ -78,8 +80,56 @@ export default function FAQs() {
         </div>
 
         {/* Right Column - For additional content */}
-        <div>
-          {/* Add your additional content here */}
+        <div className="flex items-center justify-center">
+          <CardContainer className="font-clash-display">
+            <CardBody className="bg-card relative group/card dark:hover:shadow-2xl dark:hover:shadow-primary/[0.1] border-border w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-clash-display text-foreground"
+              >
+                Centraliza tus finanzas
+              </CardItem>
+              <CardItem
+                as="p"
+                translateZ="60"
+                className="text-muted-foreground text-sm max-w-sm mt-2 font-clash-display"
+              >
+                Descubre cómo Cedi puede ayudarte a gestionar mejor tus finanzas empresariales
+              </CardItem>
+              <CardItem
+                translateZ="100"
+                rotateX={20}
+                rotateZ={-10}
+                className="w-full mt-4"
+              >
+                <Image
+                  src="/foto-restaurante.jpg" // Add your image here
+                  height={400}
+                  width={600}
+                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  alt="Dashboard Preview"
+                />
+              </CardItem>
+              <div className="flex justify-between items-center mt-20">
+                <CardItem
+                  translateZ={20}
+                  translateX={-40}
+                  as="button"
+                  className="px-4 py-2 rounded-xl text-sm font-clash-display text-foreground hover:bg-accent"
+                >
+                  Conoce más →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  translateX={40}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-clash-display hover:bg-primary/90"
+                >
+                  Comienza ahora
+                </CardItem>
+              </div>
+            </CardBody>
+          </CardContainer>
         </div>
       </div>
     </section>

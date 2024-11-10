@@ -1,15 +1,15 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    darkMode: ["class"],
-    content: [
+  darkMode: ["class"],
+  content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+	],
   theme: {
-  	extend: {
-  		colors: {
+    extend: {
+      colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -20,26 +20,26 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'
   			},
-  			primary: {
+        primary: {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
+        },
+        secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
+        },
+        muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
+        },
+        accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
-  			},
+        },
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
-  			},
+        },
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
@@ -67,16 +67,16 @@ const config: Config = {
   				black: 'hsl(var(--cedi-black))',
   				'dark-gray': 'hsl(var(--cedi-dark-gray))'
   			}
-  		},
-  		borderRadius: {
+      },
+      borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
   			'clash-display': ['var(--font-clash-display)']
-  		},
-  		animation: {
+      },
+      animation: {
   			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
 			move: "move 5s linear infinite",
 			
@@ -93,10 +93,11 @@ const config: Config = {
 			move: {
 				"0%": { transform: "translateX(-200px)" },
 				"100%": { transform: "translateX(200px)" },
-			},
+      },
   		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
 };
 export default config;
+
