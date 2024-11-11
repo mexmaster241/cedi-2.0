@@ -12,7 +12,7 @@ export function CreditCard() {
 
   const cardData = {
     number: "4539 1488 0343 6467",
-    name: "JOHN DOE",
+    name: "Juan Pérez",
     expiry: "12/25",
     cvv: "123"
   }
@@ -24,7 +24,7 @@ export function CreditCard() {
         <div className="flex justify-between items-start">
           <div className="w-12 h-10 bg-yellow-500/80 rounded-md" /> {/* Chip */}
           <img 
-            src="/logo-cedi-white.PNG" 
+            src="/logotipo-white.png" 
             alt="Cedi Logo" 
             className="w-16 h-16 object-contain opacity-80" 
           />
@@ -40,11 +40,11 @@ export function CreditCard() {
         {/* Card Holder Info */}
         <div className="flex justify-between items-end mt-4">
           <div className="space-y-1">
-            <p className="text-xs text-gray-300 uppercase">Card Holder</p>
+            <p className="text-xs font-clash-display text-gray-300 uppercase">Nombre</p>
             <p className="font-clash-display">{cardData.name}</p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-gray-300 uppercase">Expires</p>
+            <p className="text-xs font-clash-display text-gray-300 uppercase">Expira</p>
             <p className="font-clash-display">{cardData.expiry}</p>
           </div>
         </div>

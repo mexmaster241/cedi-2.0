@@ -51,12 +51,22 @@ export function NavbarComponent() {
             </SheetContent>
           </Sheet>
           <div>
-            <Link href="/dashboard">
-              <Button className="hidden md:flex bg-cedi-beige text-cedi-black hover:bg-cedi-light-gray text-lg font-clash-display">Ingresa</Button>
-            </Link>
-            <Link href="/dashboard">
-              <Button className="md:hidden bg-cedi-beige text-cedi-black hover:bg-cedi-light-gray text-lg font-clash-display">Ingresa</Button>
-            </Link>
+            <div className="hidden md:flex gap-2">
+              <Link href="/login">
+                <Button className="bg-cedi-beige text-cedi-black hover:bg-cedi-light-gray text-lg font-clash-display">Ingresa</Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button className="bg-cedi-black text-white hover:bg-cedi-dark-gray text-lg font-clash-display">Crear cuenta</Button>
+              </Link>
+            </div>
+            <div className="md:hidden flex gap-2">
+              <Link href="/login">
+                <Button className="bg-cedi-beige text-cedi-black hover:bg-cedi-light-gray text-lg font-clash-display">Ingresa</Button>
+              </Link>
+              <Link href="/signup">
+                <Button className="bg-cedi-black text-white hover:bg-cedi-dark-gray text-lg font-clash-display">Crear cuenta</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -15,14 +15,14 @@ export function MPOSLimit({
       </h2>
       
       <div className="mb-4">
-        <p className="text-sm text-gray-600 dark:text-gray-400">MPOS Amount</p>
-        <p className="text-2xl font-bold font-clash-display text-gray-900 dark:text-white">
+        <p className="text-sm font-clash-display text-gray-600 dark:text-gray-400">MPOS Amount</p>
+        <p className="text-2xl font-clash-display text-gray-900 dark:text-white">
           ${currentAmount.toFixed(2)}
         </p>
       </div>
 
       <div>
-        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+        <div className="flex justify-between font-clash-display text-sm text-gray-600 dark:text-gray-400 mb-2">
           <span>Limit</span>
           <span>$3,000,000</span>
         </div>

@@ -305,15 +305,21 @@ export function BankingSidebar({ children }: { children: React.ReactNode }) {
                 <Avatar className="h-9 w-9 cursor-pointer">
                   <AvatarImage src="/avatars/default-avatar.png" alt="Profile" />
                   <AvatarFallback className="bg-cedi-dark-gray text-white">
-                    UN
+                    <User className="h-5 w-5" />
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel className="font-clash-display">My Account</DropdownMenuLabel>
+                <DropdownMenuLabel className="font-clash-display">Mi Cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="font-clash-display cursor-pointer">
+                  <DropdownMenuItem 
+                    className="font-clash-display cursor-pointer"
+                    onClick={() => {
+                      setSelectedItem("Perfil");
+                      router.push("/dashboard/profile");
+                    }}
+                  >
                     <User className="mr-2 h-4 w-4" />
                     <span>Perfil</span>
                   </DropdownMenuItem>

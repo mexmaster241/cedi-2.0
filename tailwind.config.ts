@@ -79,6 +79,7 @@ const config: Config = {
       animation: {
   			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
 			move: "move 5s linear infinite",
+			float: "float 3s ease-in-out infinite",
 			
   		},
   		keyframes: {
@@ -94,7 +95,16 @@ const config: Config = {
 				"0%": { transform: "translateX(-200px)" },
 				"100%": { transform: "translateX(200px)" },
       },
-  		}
+			float: {
+				'0%, 100%': { 
+					transform: 'translateY(0) rotate(-8deg)'
+				},
+				'50%': { 
+					transform: 'translateY(-10px) rotate(-8deg)'
+				}
+			}
+  		},
+		
   	}
   },
   plugins: [require("tailwindcss-animate")],

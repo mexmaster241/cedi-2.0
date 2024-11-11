@@ -34,7 +34,7 @@ export default function DashboardPage() {
           <RevenueChart className="w-full h-full" />
         </div>
       </div>
-      <QuickActions />
+     
       <RecentTransactions transactions={[
         { 
           producto: 'MPOS',

@@ -19,6 +19,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { IconDownload, IconEye } from "@tabler/icons-react"
+import { TransactionDetailsModal } from "./transaction-details-modal"
+
 
 interface FilterState {
   dates: DateRange;
@@ -28,15 +30,34 @@ interface FilterState {
   };
 }
 
+interface Transaction {
+  id: string
+  fecha: string
+  tarjetahabiente: string
+  tarjeta: string
+  tipo: string
+  tienda: string
+  referencia: string
+  autorizacion: string
+  monto: string
+  comision: string
+  cashback: string
+  recargo: string
+  cargoFinal: string
+}
+
 export function MovimientosTab() {
   const [search, setSearch] = useState("")
   const [dateTimeRange, setDateTimeRange] = useState<FilterState>()
   const [tipo, setTipo] = useState("todo")
   const [estatus, setEstatus] = useState("todo")
+  const [selectedCard, setSelectedCard] = useState<string>("all")
   const dateTimeRangeRef = useRef<{ reset: () => void }>(null)
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
 
   const handleFilter = () => {
     console.log({
+      selectedCard,
       search,
       dateTimeRange,
       tipo,
@@ -45,6 +66,7 @@ export function MovimientosTab() {
   }
 
   const handleClear = () => {
+    setSelectedCard("all")
     setSearch("")
     setDateTimeRange(undefined)
     setTipo("todo")
@@ -52,10 +74,40 @@ export function MovimientosTab() {
     dateTimeRangeRef.current?.reset()
   }
 
+  // Example transaction data
+  const sampleTransaction: Transaction = {
+    id: "TRX-001",
+    fecha: "2024-03-21",
+    tarjetahabiente: "Juan Pérez",
+    tarjeta: "**** 1234",
+    tipo: "Compra",
+    tienda: "Tienda ABC",
+    referencia: "REF123",
+    autorizacion: "AUTH456",
+    monto: "$1,000.00",
+    comision: "$39.00",
+    cashback: "$10.00",
+    recargo: "$0.00",
+    cargoFinal: "$1,029.00"
+  }
+
   return (
     <div className="space-y-6">
       {/* Filters Section - Not scrollable */}
       <div className="flex flex-col gap-4">
+        {/* Card Selection */}
+        <Select value={selectedCard} onValueChange={setSelectedCard}>
+          <SelectTrigger className="font-clash-display">
+            <SelectValue placeholder="Seleccionar Tarjeta" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem className="font-clash-display" value="all">Todas las tarjetas</SelectItem>
+            <SelectItem className="font-clash-display" value="card1">**** 1234</SelectItem>
+            <SelectItem className="font-clash-display" value="card2">**** 5678</SelectItem>
+            <SelectItem className="font-clash-display" value="card3">**** 9012</SelectItem>
+          </SelectContent>
+        </Select>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Input
             className="font-clash-display"
@@ -152,7 +204,12 @@ export function MovimientosTab() {
                     <Button variant="ghost" size="icon">
                       <IconDownload className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="font-clash-display"
+                      onClick={() => setSelectedTransaction(sampleTransaction)}
+                    >
                       <IconEye className="h-4 w-4" />
                     </Button>
                   </div>
@@ -163,6 +220,12 @@ export function MovimientosTab() {
           </Table>
         </div>
       </div>
+
+      <TransactionDetailsModal
+        isOpen={!!selectedTransaction}
+        onClose={() => setSelectedTransaction(null)}
+        transaction={selectedTransaction}
+      />
     </div>
   )
 }
