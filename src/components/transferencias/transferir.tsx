@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TransferirForm } from "./TransferirForm"
+import { DispersionTab } from "./dispersion"
 
 export function Transferir() {
   return (
@@ -30,14 +31,14 @@ export function Transferir() {
         <TabsContent value="codi">
           <Card className="p-6">
             <h2 className="text-lg font-clash-display mb-4">Generar código CoDi</h2>
-            {/* We'll add the CoDi generation form here */}
+          
           </Card>
         </TabsContent>
 
         <TabsContent value="dispersion">
           <Card className="p-6">
             <h2 className="text-lg font-clash-display mb-4">Dispersión de pagos</h2>
-            {/* We'll add the dispersion form here */}
+            <DispersionTab />
           </Card>
         </TabsContent>
       </Tabs>

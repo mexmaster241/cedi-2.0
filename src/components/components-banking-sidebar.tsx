@@ -69,9 +69,10 @@ import { TransferenciasLimite } from "./dashboard/TransferenciasLimite"
 import { MPOSLimit } from "./dashboard/MPOSLimit"
 import { EcommerceLimits } from "./dashboard/EcommerceLimits"
 import TransferenciasPage from "@/app/dashboard/transferencias/page"
+import { useRouter } from "next/navigation"
 
 
-// This is sample data for a banking app.
+
 const data = {
   navMain: [
     {
@@ -83,75 +84,52 @@ const data = {
     {
       title: "Transferencias",
       icon: FileText,
-      url: "/dashboard/transferencias",
+      url: "transferencias",
       className: "font-clash-display",
       items: [
         {
           title: "Pago de tarjeta",
-          url: "#",
+          url: "transferencias/pago-de-tarjetas",
           className: "font-clash-display",
         },
       ],
     },
     {
-      title: "Negocios",
+      title: "POS",
       icon: DollarSign,
-      url: "#",
+      url: "pos",
       className: "font-clash-display",
-      items: [
-        {
-          title: "MiPOS",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "E-commerce",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
+      
     },
-    {
-      title: "Grupos",
-      icon: Users,
-      url: "#",
-      className: "font-clash-display",
-    },
+    // {
+    //   title: "Grupos",
+    //   icon: Users,
+    //   url: "#",
+    //   className: "font-clash-display",
+    // },
+    // {
+    //   title: "Tarjetas",
+    //   icon: CreditCard,
+    //   url: "#",
+    //   className: "font-clash-display",
+    //   items: [
+    //     {
+    //       title: "Tarjetas de Crédito",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //     {
+    //       title: "Tarjetas de Débito",
+    //       url: "#",
+    //       className: "font-clash-display",
+    //     },
+    //   ],
+    // },
     {
       title: "Tarjetas",
-      icon: CreditCard,
-      url: "#",
-      className: "font-clash-display",
-      items: [
-        {
-          title: "Tarjetas de Crédito",
-          url: "#",
-          className: "font-clash-display",
-        },
-        {
-          title: "Tarjetas de Débito",
-          url: "#",
-          className: "font-clash-display",
-        },
-      ],
-    },
-    {
-      title: "Transacciones",
       icon: Wallet,
-      url: "#",
+      url: "tarjetas",
       className: "font-clash-display",
-      // items: [
-      //   {
-      //     title: "Transacciones Recientes",
-      //     url: "#",
-      //     className: "font-clash-display",
-      //   },
-      //   {
-      //     title: "Estados de Cuenta",
-      //     url: "#",
-      //     className: "font-clash-display",
-      //   },
-      // ],
     },
     // {
     //   title: "Pagos de Facturas",
@@ -198,74 +176,20 @@ const data = {
   ],
 }
 
-export function BankingSidebar() {
+export function BankingSidebar({ children }: { children: React.ReactNode }) {
   const { selectedItem, setSelectedItem } = useSidebar();
   const [selectedVersion, setSelectedVersion] = React.useState("1.0.0");
   const versions = ["1.0.0", "1.1.0", "2.0.0"];
 
+  const router = useRouter()
+
   const renderContent = () => {
-    if (selectedItem === 'Dashboard' || selectedItem === data.navMain[0].title) {
-      return (
-        <>
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:max-w-2xl">
-              <BalanceCard 
-                balance={5240.50} 
-                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg" 
-              />
-              <TransferenciasLimite 
-                transferenciasRecibidas={1500000} 
-                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
-              />
-              <MPOSLimit 
-                currentAmount={1000000} 
-                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
-              />
-              <EcommerceLimits 
-                currentAmount={1000000} 
-                className="transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
-              />
-            </div>
-            <div className="flex-1 h-[400px] lg:h-[500px]">
-              <RevenueChart className="w-full h-full" />
-            </div>
-          </div>
-          <div className="mt-6">
-            <QuickActions />
-          </div>
-          <div className="mt-6">
-            <RecentTransactions transactions={[
-              { 
-                producto: 'MPOS',
-                tipo: 'Venta',
-                estatus: 'Completado',
-                monto: 85.20,
-                date: '2024-03-20'
-              },
-              { 
-                producto: 'Transferencias',
-                tipo: 'Pago',
-                estatus: 'Procesando',
-                monto: -120.00,
-                date: '2024-03-19'
-              },
-              { 
-                producto: 'E-commerce',
-                tipo: 'Venta Online',
-                estatus: 'Completado',
-                monto: 65.99,
-                date: '2024-03-18'
-              },
-            ]} />
-          </div>
-        </>
-      );
-    }
-    if (selectedItem === 'Transferencias') {
-      return <TransferenciasPage />;
-    }
-    return <div>Select an item from the sidebar</div>;
-  };
+    return (
+      <div className="flex-1 overflow-auto p-6">
+        {children}
+      </div>
+    )
+  }
 
   return (
     <SidebarProvider>
@@ -321,7 +245,10 @@ export function BankingSidebar() {
                 >
                   <CollapsibleTrigger 
                     className="flex w-full items-center"
-                    onClick={() => setSelectedItem(item.title)}
+                    onClick={() => {
+                      setSelectedItem(item.title)
+                      router.push(`/dashboard/${item.url}`)
+                    }}
                   >
                     {item.icon && <item.icon className="mr-3 h-4 w-4" />}
                     <span className={`${item.className} font-clash-display`}>{item.title}</span>
@@ -338,9 +265,9 @@ export function BankingSidebar() {
                           <SidebarMenuItem key={subItem.title}>
                             <SidebarMenuButton
                               asChild
-                              onClick={(e) => {
-                                e.preventDefault();
+                              onClick={() => {
                                 setSelectedItem(subItem.title);
+                                router.push(`/dashboard/${subItem.url}`);
                               }}
                             >
                               <a href="#" className={`pl-10 ${subItem.className}`}>

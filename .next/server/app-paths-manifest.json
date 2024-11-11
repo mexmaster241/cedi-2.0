@@ -1,3 +1,8 @@
 {
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/tarjetas/page": "app/dashboard/tarjetas/page.js",
+  "/dashboard/pos/page": "app/dashboard/pos/page.js",
+  "/dashboard/transferencias/pago-de-tarjetas/page": "app/dashboard/transferencias/pago-de-tarjetas/page.js",
+  "/dashboard/transferencias/page": "app/dashboard/transferencias/page.js"
 }
