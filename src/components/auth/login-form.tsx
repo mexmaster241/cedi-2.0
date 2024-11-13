@@ -13,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
+import { Eye, EyeOff } from 'lucide-react'
 
 export function LoginForm() {
   const form = useForm({
@@ -21,6 +22,8 @@ export function LoginForm() {
       password: '',
     },
   })
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const onSubmit = (data: any) => {
     console.log(data)
@@ -50,7 +53,26 @@ export function LoginForm() {
             <FormItem>
               <FormLabel className="font-clash-display">Contraseña</FormLabel>
               <FormControl>
-                <Input className="font-clash-display" type="password" {...field} />
+                <div className="relative">
+                  <Input 
+                    className="font-clash-display pr-10" 
+                    type={showPassword ? "text" : "password"} 
+                    {...field} 
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <Eye className="h-4 w-4" />
+                    ) : (
+                      <EyeOff className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

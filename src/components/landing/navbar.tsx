@@ -22,8 +22,10 @@ export function NavbarComponent() {
               <Image src="/logotipo.png" alt="FinTech Co. Logo" width={120} height={40} />
             </Link>
             <nav className="flex items-center space-x-6 text-lg font-medium">
-              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/products">Productos</Link>
-              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/pricing">Precios</Link>
+              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/productos">Productos</Link>
+              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/precios">Precios</Link>
+              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/contacto">Contacto</Link>
+              <Link className="font-clash-display hover:bg-gray-100 rounded-md px-2 py-1" href="/documentacion">Documentación</Link>
             </nav>
           </div>
           <Sheet>

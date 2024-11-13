@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Link from 'next/link'
+import { Eye, EyeOff } from 'lucide-react'
 
 const signUpSchema = z.object({
   email: z.string().email('Correo electrónico inválido'),
@@ -48,6 +49,9 @@ export function SignUpForm() {
       acceptTerms: false,
     },
   })
+
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const onSubmit = (data: SignUpFormValues) => {
     console.log(data)
@@ -108,7 +112,26 @@ export function SignUpForm() {
             <FormItem className="space-y-1.5">
               <FormLabel className="font-clash-display">Contraseña</FormLabel>
               <FormControl>
-                <Input type="password" {...field} className="h-9" />
+                <div className="relative">
+                  <Input 
+                    type={showPassword ? "text" : "password"} 
+                    {...field} 
+                    className="h-9 pr-10" 
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <Eye className="h-4 w-4" />
+                    ) : (
+                      <EyeOff className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -122,7 +145,26 @@ export function SignUpForm() {
             <FormItem className="space-y-1.5">
               <FormLabel className="font-clash-display">Confirmar contraseña</FormLabel>
               <FormControl>
-                <Input type="password" {...field} className="h-9" />
+                <div className="relative">
+                  <Input 
+                    type={showConfirmPassword ? "text" : "password"} 
+                    {...field} 
+                    className="h-9 pr-10" 
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <Eye className="h-4 w-4" />
+                    ) : (
+                      <EyeOff className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
