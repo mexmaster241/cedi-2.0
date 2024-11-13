@@ -60,7 +60,7 @@ const notifications = [
       <div className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 shadow-sm">
         <div className="relative h-10 w-10 shrink-0">
           <Image
-            src="/logo-cedi.png"
+            src="/logo-cedi.PNG"
             alt="Logo"
             fill
             className="rounded-full object-cover"
