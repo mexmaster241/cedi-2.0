@@ -15,9 +15,11 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <NavbarComponent />
-      {children}
-      <Footer />
+      <div className="flex flex-col min-h-screen overflow-hidden">
+        <NavbarComponent />
+        {children}
+        <Footer />
+      </div>
     </>
   );
 }

@@ -33,30 +33,30 @@ export default function FAQs() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="container py-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+    <section className="container py-12 sm:py-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 px-4 sm:px-6">
         {/* Left Column - Title and FAQs */}
-        <div className="space-y-16">
+        <div className="space-y-8 sm:space-y-12">
           {/* Header */}
-          <div className="space-y-6">
-            <h2 className="text-4xl font-clash-display leading-tight">
+          <div className="space-y-4 sm:space-y-6">
+            <h2 className="text-3xl sm:text-4xl font-clash-display leading-tight">
               Moderniza tu negocio con Cedi
             </h2>
-            <p className="text-muted-foreground font-clash-display text-lg">
+            <p className="text-base sm:text-lg text-muted-foreground font-clash-display">
               Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y cómo podemos ayudar a tu negocio.
             </p>
           </div>
 
           {/* FAQs */}
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4">
             {faqData.map((faq, index) => (
               <div key={index} className="border border-border rounded-lg overflow-hidden">
                 <button
-                  className="w-full flex justify-between items-center p-6 bg-card hover:bg-accent text-left"
+                  className="w-full flex justify-between items-center p-4 sm:p-6 bg-card hover:bg-accent text-left"
                   onClick={() => setActiveIndex(activeIndex === index ? null : index)}
                 >
-                  <span className="font-clash-display text-lg">{faq.question}</span>
-                  <span className="transform transition-transform duration-200 text-2xl">
+                  <span className="font-clash-display text-base sm:text-lg pr-4">{faq.question}</span>
+                  <span className="transform transition-transform duration-200 text-xl sm:text-2xl flex-shrink-0">
                     {activeIndex === index ? '−' : '+'}
                   </span>
                 </button>
@@ -68,7 +68,7 @@ export default function FAQs() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="p-6 bg-card/50 font-clash-display text-muted-foreground">
+                      <div className="p-4 sm:p-6 bg-card/50 font-clash-display text-sm sm:text-base text-muted-foreground">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -79,20 +79,20 @@ export default function FAQs() {
           </div>
         </div>
 
-        {/* Right Column - For additional content */}
-        <div className="flex items-center justify-center">
+        {/* Right Column - 3D Card */}
+        <div className="flex items-center justify-center mt-8 lg:mt-0">
           <CardContainer className="font-clash-display">
-            <CardBody className="bg-card relative group/card dark:hover:shadow-2xl dark:hover:shadow-primary/[0.1] border-border w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+            <CardBody className="bg-card relative group/card dark:hover:shadow-2xl dark:hover:shadow-primary/[0.1] border-border w-full max-w-[320px] sm:max-w-[400px] h-auto rounded-xl p-4 sm:p-6 border">
               <CardItem
                 translateZ="50"
-                className="text-xl font-clash-display text-foreground"
+                className="text-lg sm:text-xl font-clash-display text-foreground"
               >
                 Centraliza tus finanzas
               </CardItem>
               <CardItem
                 as="p"
                 translateZ="60"
-                className="text-muted-foreground text-sm max-w-sm mt-2 font-clash-display"
+                className="text-sm sm:text-base text-muted-foreground max-w-sm mt-2 font-clash-display"
               >
                 Descubre cómo Cedi puede ayudarte a gestionar mejor tus finanzas empresariales
               </CardItem>
@@ -103,27 +103,25 @@ export default function FAQs() {
                 className="w-full mt-4"
               >
                 <Image
-                  src="/foto-restaurante.jpg" // Add your image here
+                  src="/foto-restaurante.jpg"
                   height={400}
                   width={600}
-                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="h-48 sm:h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
                   alt="Dashboard Preview"
                 />
               </CardItem>
-              <div className="flex justify-between items-center mt-20">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-8 sm:mt-12">
                 <CardItem
                   translateZ={20}
-                  translateX={-40}
                   as="button"
-                  className="px-4 py-2 rounded-xl text-sm font-clash-display text-foreground hover:bg-accent"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl text-sm font-clash-display text-foreground hover:bg-accent"
                 >
                   Conoce más →
                 </CardItem>
                 <CardItem
                   translateZ={20}
-                  translateX={40}
                   as="button"
-                  className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-clash-display hover:bg-primary/90"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-clash-display hover:bg-primary/90"
                 >
                   Comienza ahora
                 </CardItem>

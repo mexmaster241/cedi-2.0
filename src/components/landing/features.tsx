@@ -57,8 +57,8 @@ const notifications = [
 
   const PaymentNotification = ({ type, amount, name, time }: { type: string, amount: string, name: string, time: string }) => {
     return (
-      <div className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 shadow-sm">
-        <div className="relative h-10 w-10 shrink-0">
+      <div className="flex items-center gap-3 sm:gap-4 rounded-lg border border-border bg-card p-3 sm:p-4 shadow-sm">
+        <div className="relative h-8 w-8 sm:h-10 sm:w-10 shrink-0">
           <Image
             src="/logo-cedi.PNG"
             alt="Logo"
@@ -67,9 +67,9 @@ const notifications = [
           />
         </div>
         <div className="flex flex-col">
-          <p className="text-sm font-clash-display">{type}</p>
-          <p className="text-xs font-clash-display text-muted-foreground">{amount} de {name}</p>
-          <p className="text-xs font-clash-display text-muted-foreground/60">{time}</p>
+          <p className="text-xs sm:text-sm font-clash-display">{type}</p>
+          <p className="text-[10px] sm:text-xs font-clash-display text-muted-foreground">{amount} de {name}</p>
+          <p className="text-[10px] sm:text-xs font-clash-display text-muted-foreground/60">{time}</p>
         </div>
       </div>
     );
@@ -77,32 +77,32 @@ const notifications = [
 
 export default function Features() {
   return (
-    <section className="container py-24">
-      {/* Header Section */}
-      <div className="flex justify-between items-start mb-16">
-        <h2 className="text-4xl font-clash-display leading-tight max-w-md">
+    <section className="container py-12 sm:py-24">
+      {/* Header Section - Added horizontal padding */}
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 mb-8 lg:mb-16 px-4 sm:px-6">
+        <h2 className="text-3xl sm:text-4xl font-clash-display leading-tight max-w-md">
           Todo lo que necesitas para tu negocio en un solo lugar
         </h2>
         
-        <div className="flex flex-col items-start max-w-md gap-6">
-          <p className="text-muted-foreground font-clash-display text-lg">
+        <div className="flex flex-col items-start max-w-md gap-4 sm:gap-6">
+          <p className="text-base sm:text-lg text-muted-foreground font-clash-display">
             Acepta pagos, realiza cobros y administra tus finanzas con nuestra plataforma integral diseñada para hacer crecer tu negocio.
           </p>
           
           <a 
             href="#" 
-            className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-clash-display text-primary-foreground shadow transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-6 sm:px-8 py-2.5 sm:py-3 text-sm font-clash-display text-primary-foreground shadow transition-colors hover:bg-primary/90"
           >
             Comienza ahora
           </a>
         </div>
       </div>
 
-      {/* Cards Section */}
-      <div className="flex justify-start gap-8">
-        {/* First card (notifications) */}
-        <div className="w-[400px] h-[500px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6">
-          <h3 className="font-clash-display text-lg mb-4">Recibe cobros de tu negocio</h3>
+      {/* Cards Section - Made cards smaller */}
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 overflow-x-auto pb-4 lg:pb-0 px-4 sm:px-6">
+        {/* First card - Reduced heights */}
+        <div className="min-w-[280px] sm:min-w-[320px] lg:w-[380px] h-[350px] sm:h-[450px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-6">
+          <h3 className="font-clash-display text-base sm:text-lg mb-4">Recibe cobros de tu negocio</h3>
           <div className="h-[calc(100%-2rem)] overflow-hidden">
             <AnimatedList className="w-full" delay={2000}>
               {notifications.map((notification) => (
@@ -115,23 +115,22 @@ export default function Features() {
           </div>
         </div>
 
-        {/* Second card (POS Terminal) - Updated styling */}
-        <div className="w-[400px] h-[500px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6">
-          <h3 className="font-clash-display text-lg mb-4">Acepta pagos presenciales</h3>
+        {/* Second card - Reduced heights */}
+        <div className="min-w-[280px] sm:min-w-[320px] lg:w-[380px] h-[350px] sm:h-[450px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-6">
+          <h3 className="font-clash-display text-base sm:text-lg mb-4">Acepta pagos presenciales</h3>
           <div className="h-[calc(100%-2rem)]">
             <CardSkeletonContainer className="bg-transparent">
               <Skeleton />
             </CardSkeletonContainer>
-           
           </div>
         </div>
 
-        {/* Third card (Bank Transfers) */}
-        <div className="w-[400px] h-[500px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-6"> 
-          <h3 className="font-clash-display text-lg mb-4">Dispersa pagos a tus empleados</h3>
-            <div className="relative h-[calc(100%-4rem)] w-full">
-              <BankTransferAnimation />
-            </div>
+        {/* Third card - Reduced heights */}
+        <div className="min-w-[280px] sm:min-w-[320px] lg:w-[380px] h-[350px] sm:h-[450px] rounded-xl border border-border bg-card/50 backdrop-blur-sm p-4 sm:p-6">
+          <h3 className="font-clash-display text-base sm:text-lg mb-4">Dispersa pagos a tus empleados</h3>
+          <div className="relative h-[calc(100%-4rem)] w-full">
+            <BankTransferAnimation />
+          </div>
         </div>
       </div>
     </section>
