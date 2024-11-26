@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SidebarProvider } from "@/components/sidebar/SidebarContext";
-import { LayoutContent } from '@/components/landing/LayoutContext';
+import { ClientLayout } from '@/components/layout/ClientLayout';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,19 +32,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <html lang="en">
+    <html lang="en">
+      <head>
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <body 
-          className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}
-        >
-          <LayoutContent>{children}</LayoutContent>
-        </body>
-      </html>
-    </SidebarProvider>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}>
+        <ClientLayout>{children}</ClientLayout>
+      </body>
+    </html>
   );
 }
