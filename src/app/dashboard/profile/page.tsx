@@ -44,6 +44,9 @@ const profileFormSchema = z.object({
   fullName: z.string().min(3, {
     message: "Full name must be at least 3 characters.",
   }),
+  company: z.string().min(3, {
+    message: "Company name must be at least 3 characters.",
+  }),
   phone: z.string().min(10, {
     message: "Phone number must be at least 10 digits.",
   }),
@@ -80,6 +83,7 @@ export default function ProfilePage() {
     email: "john@example.com",
     fullName: "John Doe",
     phone: "1234567890",
+    company: "CediOS",
   };
 
   const form = useForm<ProfileFormValues>({
@@ -177,6 +181,25 @@ export default function ProfilePage() {
                         {...field}
                         disabled={!isEditing}
                         placeholder=""
+                        className="font-clash-display"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-clash-display">Empresa</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={!isEditing}
+                        placeholder="CediOS"
                         className="font-clash-display"
                       />
                     </FormControl>
