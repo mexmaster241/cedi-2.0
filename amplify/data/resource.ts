@@ -10,9 +10,11 @@ const schema = a.schema({
       balance: a.float().default(0),
       lastLogin: a.datetime(),
     })
-    .authorization((allow) => [
-      allow.custom().to(['update', 'read', 'create']),
-      allow.owner().to(['create', 'read'])
+    .authorization((rules) => [
+      // Allow authenticated users to read and update their own records
+      rules.owner().to(['read', 'update']),
+      // Allow unauthenticated creation of new users
+      rules.publicApiKey().to(['create']),
     ]),
 });
 
@@ -22,6 +24,9 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'userPool',
-  },
+      defaultAuthorizationMode: 'apiKey',
+      apiKeyAuthorizationMode: { 
+          expiresInDays: 30 
+      }
+  }
 });
