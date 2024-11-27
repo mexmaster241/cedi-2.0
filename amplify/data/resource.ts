@@ -10,6 +10,10 @@ const schema = a.schema({
       balance: a.float().default(0),
       lastLogin: a.datetime(),
     })
+    .authorization((allow) => [
+      allow.custom().to(['update', 'read', 'create']),
+      allow.owner().to(['create', 'read'])
+    ]),
 });
 
 
