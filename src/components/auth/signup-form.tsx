@@ -68,7 +68,7 @@ export function SignUpForm() {
     try {
       setIsLoading(true);
       
-      const { email, password, firstName, lastName, company } = data;
+      const { email, password, firstName, lastName } = data;
       
       await signUp({
         username: email,
