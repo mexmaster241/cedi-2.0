@@ -17,11 +17,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
+import { signUp, confirmSignUp, autoSignIn } from 'aws-amplify/auth';
+import { useRouter } from 'next/navigation';
+import { useToast } from "@/hooks/use-toast";
+import OTPInput from './OTPInput'
 
 const signUpSchema = z.object({
   email: z.string().email('Correo electrónico inválido'),
   firstName: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
   lastName: z.string().min(2, 'El apellido debe tener al menos 2 caracteres'),
+  company: z.string().min(2, 'El nombre de la empresa debe tener al menos 2 caracteres'),
   password: z.string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
     .regex(/[A-Z]/, 'La contraseña debe contener al menos una mayúscula')
@@ -44,6 +49,7 @@ export function SignUpForm() {
       email: '',
       firstName: '',
       lastName: '',
+      company: '',
       password: '',
       confirmPassword: '',
       acceptTerms: false,
@@ -52,10 +58,53 @@ export function SignUpForm() {
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
+  const [signupData, setSignupData] = useState({ email: '', password: '' });
 
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log(data)
-    // Add your signup logic here
+  const onSubmit = async (data: SignUpFormValues) => {
+    try {
+      setIsLoading(true);
+      
+      const { email, password, firstName, lastName, company } = data;
+      
+      await signUp({
+        username: email,
+        password,
+        options: {
+          userAttributes: {
+            email,
+            given_name: firstName,
+            family_name: lastName,
+          },
+          autoSignIn: true
+        }
+      });
+
+      setSignupData({ email, password });
+      setShowOTP(true);
+      
+      toast({
+        title: "Cuenta creada exitosamente",
+        description: "Te hemos enviado un código de verificación.",
+      });
+      
+    } catch (error) {
+      console.error('Error signing up:', error);
+      toast({
+        title: "Error al crear la cuenta",
+        description: error instanceof Error ? error.message : "Ocurrió un error inesperado",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (showOTP) {
+    return <OTPInput email={signupData.email} password={signupData.password} />;
   }
 
   return (
@@ -63,7 +112,7 @@ export function SignUpForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
       <FormField
           control={form.control}
-          name="email"
+          name="company"
           render={({ field }) => (
             <FormItem className="space-y-1.5">
               <FormLabel className="font-clash-display">Empresa</FormLabel>
@@ -212,8 +261,12 @@ export function SignUpForm() {
           )}
         />
 
-        <Button type="submit" className="w-full font-clash-display bg-cedi-black text-white h-9">
-          Crear cuenta
+        <Button 
+          type="submit" 
+          className="w-full font-clash-display bg-cedi-black text-white h-9"
+          disabled={isLoading}
+        >
+          {isLoading ? "Creando cuenta..." : "Crear cuenta"}
         </Button>
 
         <div className="text-center font-clash-display text-sm pt-2">

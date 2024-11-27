@@ -68,8 +68,10 @@ import RevenueChart from "@/components/dashboard/RevenueChart";
 import { TransferenciasLimite } from "./dashboard/TransferenciasLimite"
 import { MPOSLimit } from "./dashboard/MPOSLimit"
 import { EcommerceLimits } from "./dashboard/EcommerceLimits"
-import TransferenciasPage from "@/app/dashboard/transferencias/page"
+import TransferenciasPage from "@/app/(home)/dashboard/transferencias/page"
 import { useRouter } from "next/navigation"
+import { signOut } from 'aws-amplify/auth';
+import { useToast } from "@/hooks/use-toast";
 
 
 
@@ -182,6 +184,25 @@ export function BankingSidebar({ children }: { children: React.ReactNode }) {
   const versions = ["1.0.0", "1.1.0", "2.0.0"];
 
   const router = useRouter()
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast({
+        title: "Sesión cerrada",
+        description: "Has cerrado sesión exitosamente",
+      });
+      router.push('/login');
+    } catch (error) {
+      console.error('Error signing out:', error);
+      toast({
+        title: "Error al cerrar sesión",
+        description: error instanceof Error ? error.message : "Ocurrió un error inesperado",
+        variant: "destructive",
+      });
+    }
+  };
 
   const renderContent = () => {
     return (
@@ -329,7 +350,10 @@ export function BankingSidebar({ children }: { children: React.ReactNode }) {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="font-clash-display cursor-pointer text-red-600">
+                <DropdownMenuItem 
+                  className="font-clash-display cursor-pointer text-red-600"
+                  onClick={handleSignOut}
+                >
                   <span>Cerrar sesión</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

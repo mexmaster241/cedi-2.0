@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ClientLayout } from '@/components/layout/ClientLayout';
+import { Amplify } from 'aws-amplify';
+import outputs from '../../amplify_outputs.json';
+import config from '@/amplifyconfiguration.json';
+import ConfigureAmplifyClientSide from "@/components/auth/ConfigureAmplify";
+
+Amplify.configure(outputs, { ssr: true });
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,7 +47,9 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}>
+        <ConfigureAmplifyClientSide />
         <ClientLayout>{children}</ClientLayout>
+
       </body>
     </html>
   );

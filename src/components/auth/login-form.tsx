@@ -14,20 +14,61 @@ import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
+import { signIn } from 'aws-amplify/auth';
+import { useRouter } from 'next/navigation';
+import { useToast } from "@/hooks/use-toast";
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+// Add login form schema
+const loginSchema = z.object({
+  email: z.string().email('Correo electrónico inválido'),
+  password: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres'),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
-  const form = useForm({
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
     },
-  })
+  });
 
   const [showPassword, setShowPassword] = useState(false)
 
-  const onSubmit = (data: any) => {
-    console.log(data)
-    // WIP login logic
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      setIsLoading(true);
+      
+      await signIn({
+        username: data.email,
+        password: data.password,
+      });
+
+      toast({
+        title: "Inicio de sesión exitoso",
+        description: "Bienvenido de vuelta",
+      });
+
+      router.push('/dashboard');
+      
+    } catch (error) {
+      console.error('Error signing in:', error);
+      toast({
+        title: "Error al iniciar sesión",
+        description: error instanceof Error ? error.message : "Credenciales inválidas",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -78,8 +119,12 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-cedi-black hover:bg-cedi-light-gray font-clash-display text-white">
-          Iniciar sesión
+        <Button 
+          type="submit" 
+          className="w-full bg-cedi-black hover:bg-cedi-light-gray font-clash-display text-white"
+          disabled={isLoading}
+        >
+          {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
         </Button>
         <div className="text-center text-sm">
           <Link href="/forgot-password" className="text-cedi-black font-clash-display hover:underline">
