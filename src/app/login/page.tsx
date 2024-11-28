@@ -17,7 +17,7 @@ export default function LoginPage() {
               className="w-[120px] sm:w-[150px]"
             />
             <h1 className="text-2xl sm:text-3xl font-clash-display font-bold mt-4 sm:mt-6 mb-2">
-              Bienvenido de vuelta
+              Bienvenid@ de vuelta
             </h1>
             <p className="text-sm sm:text-base text-gray-600 font-clash-display">
               Ingresa tus credenciales para acceder a tu cuenta
