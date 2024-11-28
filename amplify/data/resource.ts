@@ -12,7 +12,7 @@ const schema = a.schema({
     })
     .authorization((rules) => [
       // Allow authenticated users to read and update their own records
-      rules.owner().to(['read', 'update']),
+      // rules.owner().to(['read', 'update']),
       // Allow unauthenticated creation of new users
       rules.publicApiKey().to(['create']),
     ]),
