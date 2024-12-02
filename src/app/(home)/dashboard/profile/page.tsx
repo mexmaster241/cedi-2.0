@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -33,6 +33,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
 
 const profileFormSchema = z.object({
   username: z.string().min(2, {
@@ -44,12 +45,12 @@ const profileFormSchema = z.object({
   fullName: z.string().min(3, {
     message: "Full name must be at least 3 characters.",
   }),
-  company: z.string().min(3, {
-    message: "Company name must be at least 3 characters.",
-  }),
-  phone: z.string().min(10, {
-    message: "Phone number must be at least 10 digits.",
-  }),
+  // company: z.string().min(3, {
+  //   message: "Company name must be at least 3 characters.",
+  // }),
+  // phone: z.string().min(10, {
+  //   message: "Phone number must be at least 10 digits.",
+  // }),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -76,20 +77,42 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [is2FAEnabled, setIs2FAEnabled] = useState(false);
   const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
-
-  // WIP conectar al backend
-  const defaultValues: Partial<ProfileFormValues> = {
-    username: "johndoe",
-    email: "john@example.com",
-    fullName: "John Doe",
-    phone: "1234567890",
-    company: "CediOS",
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues,
+    defaultValues: {
+      username: "",
+      email: "",
+      fullName: "",
+    },
   });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        const attributes = await fetchUserAttributes();
+        
+        form.reset({
+          username: currentUser.username,
+          email: attributes.email || "",
+          fullName: `${attributes.given_name || ""} ${attributes.family_name || ""}`.trim(),
+        });
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        toast({
+          title: "Error",
+          description: "Failed to load user profile",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [form, toast]);
 
   const passwordForm = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordFormSchema),
@@ -189,7 +212,7 @@ export default function ProfilePage() {
                 )}
               />
 
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="company"
                 render={({ field }) => (
@@ -359,7 +382,7 @@ export default function ProfilePage() {
                       variant="outline"
                       onClick={() => {
                         setIsEditing(false);
-                        form.reset(defaultValues);
+                        form.reset();
                       }}
                       className="font-clash-display"
                     >

@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react'
 import { CardContent } from "@/components/ui/card"
-import { confirmSignUp, autoSignIn, resendSignUpCode } from 'aws-amplify/auth'
+import { confirmSignUp, autoSignIn, resendSignUpCode, getCurrentUser } from 'aws-amplify/auth'
 import { useRouter } from 'next/navigation'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '../ui/input-otp'
 import { REGEXP_ONLY_DIGITS } from 'input-otp'
 import { Button } from '../ui/button'
 import { useToast } from "@/hooks/use-toast"
+import { assignClabeToUser } from '@/utils/user-service'
 
 interface OTPInputProps {
     email: string;
@@ -48,25 +49,34 @@ const OTPInput: React.FC<OTPInputProps> = ({ email, password }) => {
     }, []);
 
     const handleVerifyCode = async () => {
+        if (loading) return;
         setLoading(true);
+
         try {
             await confirmSignUp({
                 username: email,
                 confirmationCode: code
             });
 
-            await autoSignIn();
+            const signInResult = await autoSignIn();
             
-            toast({
-                title: "Cuenta verificada exitosamente",
-                description: "Bienvenido a la plataforma.",
-            });
+            if (signInResult.isSignedIn) {
+                console.log("User signed in, getting current user...");
+                const { username } = await getCurrentUser();
+                console.log("Got username:", username);
+                await assignClabeToUser(username, email);
+                console.log("CLABE assigned successfully");
+            }
 
             router.push('/dashboard');
-        } catch (error) {
-            console.error('Error al verificar el código:', error);
             toast({
-                title: "Error al verificar el código",
+                title: "Cuenta verificada",
+                description: "Tu cuenta ha sido verificada exitosamente.",
+            });
+        } catch (error) {
+            console.error('Error in verification process:', error);
+            toast({
+                title: "Error al verificar la cuenta",
                 description: error instanceof Error ? error.message : "Ocurrió un error inesperado",
                 variant: "destructive",
             });

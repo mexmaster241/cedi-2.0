@@ -1,5 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import { generateClient } from 'aws-amplify/api'
+
+import { getCurrentUser } from 'aws-amplify/auth'
 import { Copy } from "lucide-react"
 import { toast } from "sonner"
 import { Card } from "@/components/ui/card"
@@ -13,10 +17,33 @@ import {
 } from "@/components/ui/select"
 import MovimientosFilter from "@/components/transferencias/TransaccionesComponent"
 import { Transferir } from "@/components/transferencias/transferir"
+import { Schema } from "../../../../../amplify/data/resource"
 
 export default function TransferenciasPage() {
-  const CLABE = "1234567890123456" 
+  const [clabe, setClabe] = useState("")
+  const client = generateClient<Schema>()
   
+  useEffect(() => {
+    async function fetchClabe() {
+      try {
+        const { username } = await getCurrentUser();
+        const userResult = await client.models.User.get({ 
+          id: username,
+        }, {
+          authMode: 'userPool',
+          selectionSet: ['id', 'clabe', 'email']
+        });
+        console.log("Current user:", username);
+        console.log("User result:", userResult);
+        setClabe(userResult.data?.clabe ?? "");
+      } catch (err) {
+        console.error("Error fetching CLABE:", err);
+        setClabe("Error loading CLABE");
+      }
+    }
+    fetchClabe();
+  }, []);
+
   const copyToClipboard = async (text: string) => {
     
     try {
@@ -35,9 +62,9 @@ export default function TransferenciasPage() {
           <div className="flex flex-col space-y-2">
             <span className="text-sm font-clash-display text-muted-foreground">CLABE</span>
             <div className="flex items-center justify-between">
-              <span className="font-clash-display">{CLABE}</span>
+              <span className="font-clash-display">{clabe || "Loading..."}</span>
               <button 
-                onClick={() => copyToClipboard(CLABE)}
+                onClick={() => copyToClipboard(clabe)}
                 className="p-1 hover:bg-muted rounded-md transition-colors"
               >
                 <Copy className="h-4 w-4" />

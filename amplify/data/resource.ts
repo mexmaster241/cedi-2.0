@@ -9,12 +9,21 @@ const schema = a.schema({
       clabe: a.string(),
       balance: a.float().default(0),
       lastLogin: a.datetime(),
+      owner: a.string(),
     })
-    .authorization((rules) => [
-      // Allow authenticated users to read and update their own records
-      rules.owner().to(['read', 'update']),
-      // Allow unauthenticated creation of new users
-      rules.publicApiKey().to(['create']),
+    .authorization((allow) => [
+      allow.owner().to(['read', 'update']),
+      allow.publicApiKey().to(['create'])
+    ]),
+    
+  ClabeSequence: a
+    .model({
+      id: a.string().required(),
+      lastSequence: a.integer().required().default(0),
+    })
+    .authorization((allow) => [
+      allow.publicApiKey().to(['read', 'update']),
+      allow.owner().to(['read', 'update']),
     ]),
 });
 
@@ -24,9 +33,9 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-      defaultAuthorizationMode: 'apiKey',
-      apiKeyAuthorizationMode: { 
-          expiresInDays: 30 
-      }
+    defaultAuthorizationMode: 'userPool',
+    apiKeyAuthorizationMode: { 
+      expiresInDays: 30 
+    }
   }
 });
