@@ -1,11 +1,12 @@
 import { generateNewClabe } from '@/utils/clabe';
 
 import { generateClient } from 'aws-amplify/api';
+import { updateUserAttributes } from 'aws-amplify/auth';
 import { Schema } from '../../amplify/data/resource';
 
 const client = generateClient<Schema>();
 
-export async function assignClabeToUser(userId: string, email: string): Promise<string> {
+export async function assignClabeToUser(userId: string, email: string, firstName: string, lastName: string): Promise<string> {
   let sequence;
   try {
     // First create sequence if it doesn't exist
@@ -36,10 +37,10 @@ export async function assignClabeToUser(userId: string, email: string): Promise<
     // Create user record with CLABE using apiKey
     const createResult = await client.models.User.create({
       id: userId,
-      email: email,  // Use the email from signup
+      email: email,
       clabe: newClabe,
-      givenName: "Pending",
-      familyName: "Pending",
+      givenName: firstName,
+      familyName: lastName,
       owner: userId,
     }, {
       authMode: 'apiKey'

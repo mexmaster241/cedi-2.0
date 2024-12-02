@@ -13,9 +13,11 @@ import { assignClabeToUser } from '@/utils/user-service'
 interface OTPInputProps {
     email: string;
     password: string;
+    firstName: string;
+    lastName: string;
 }
 
-const OTPInput: React.FC<OTPInputProps> = ({ email, password }) => {
+const OTPInput: React.FC<OTPInputProps> = ({ email, password, firstName, lastName }) => {
     const [code, setCode] = useState('');
     const [loading, setLoading] = useState(false);
     const [timer, setTimer] = useState(60);
@@ -64,7 +66,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ email, password }) => {
                 console.log("User signed in, getting current user...");
                 const { username } = await getCurrentUser();
                 console.log("Got username:", username);
-                await assignClabeToUser(username, email);
+                await assignClabeToUser(username, email, firstName, lastName);
                 console.log("CLABE assigned successfully");
             }
 
@@ -112,9 +114,9 @@ const OTPInput: React.FC<OTPInputProps> = ({ email, password }) => {
     };
 
     return (
-        <CardContent className="space-y-4">
-            <p>Ingresa el código de verificación enviado a tu correo electrónico</p>
-            <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS} value={code} onChange={setCode}>
+        <CardContent className="space-y-4 flex flex-col items-center font-clash-display">
+            <p className="text-center">Ingresa el código de verificación enviado a tu correo electrónico</p>
+            <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS} value={code} onChange={setCode} className="flex justify-center">
                 <InputOTPGroup>
                     <InputOTPSlot index={0} />
                     <InputOTPSlot index={1} />

@@ -5,6 +5,7 @@ import { ClientLayout } from '@/components/layout/ClientLayout';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
 import ConfigureAmplifyClientSide from "@/components/auth/ConfigureAmplify";
+import { Toaster } from "@/components/ui/toaster";
 
 Amplify.configure(outputs, { ssr: true });
 
@@ -48,7 +49,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}>
         <ConfigureAmplifyClientSide />
         <ClientLayout>{children}</ClientLayout>
-
+        <Toaster />
       </body>
     </html>
   );

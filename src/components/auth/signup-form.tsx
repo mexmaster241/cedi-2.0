@@ -62,7 +62,12 @@ export function SignUpForm() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
-  const [signupData, setSignupData] = useState({ email: '', password: '' });
+  const [signupData, setSignupData] = useState<{ email: string; password: string; firstName: string; lastName: string }>({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: ''
+  });
 
   const onSubmit = async (data: SignUpFormValues) => {
     try {
@@ -83,7 +88,7 @@ export function SignUpForm() {
         }
       });
 
-      setSignupData({ email, password });
+      setSignupData({ email, password, firstName, lastName });
       setShowOTP(true);
       
       toast({
@@ -104,7 +109,7 @@ export function SignUpForm() {
   };
 
   if (showOTP) {
-    return <OTPInput email={signupData.email} password={signupData.password} />;
+    return <OTPInput email={signupData.email} password={signupData.password} firstName={signupData.firstName} lastName={signupData.lastName} />;
   }
 
   return (

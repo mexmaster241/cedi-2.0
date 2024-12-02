@@ -63,7 +63,7 @@ export function LoginForm() {
       console.error('Error signing in:', error);
       toast({
         title: "Error al iniciar sesión",
-        description: error instanceof Error ? error.message : "Credenciales inválidas",
+        description: "Credenciales inválidas",
         variant: "destructive",
       });
     } finally {
